@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-echo-deployment
+  namespace: default  # Specify the namespace where the deployment should be created (default is fine)
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: hello-echo
+  template:
+    metadata:
+      labels:
+        app: hello-echo
+    spec:
+      schedulerName: my-scheduler
+      containers:
+        - name: echo-server
+          image: kicbase/echo-server:1.0
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+          ports:
+            - containerPort: 8080  # The port on which the echo server listens
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-echo-service
+spec:
+  type: NodePort  # Specify that this service will be a NodePort service
+  selector:
+    app: hello-echo  # This should match the labels in the Deployment
+  ports:
+    - protocol: TCP
+      port: 8080  # The port that the service will expose
+      targetPort: 8080  # The port on the pod
