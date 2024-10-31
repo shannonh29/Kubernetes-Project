@@ -12,7 +12,7 @@ spec:
       labels:
         app: stress
     spec:
-      schedulerName: my-scheduler
+      # schedulerName: my-scheduler #add this for scheduling purposes
       containers:
       - name: stress
         image: ntumpi/stress:latest
