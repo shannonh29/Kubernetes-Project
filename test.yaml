@@ -39,3 +39,4 @@ spec:
     - protocol: TCP
       port: 8080  # The port that the service will expose
       targetPort: 8080  # The port on the pod
+      nodePort: 30007
