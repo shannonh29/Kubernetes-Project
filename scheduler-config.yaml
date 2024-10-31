@@ -14,7 +14,7 @@ profiles:
                     weight: 5
                   - name: memory
                     weight: 5
-               type: MostAllocated
+               type: MostAllocated #change to LeastAllocated for LRP
          name: NodeResourcesFit
      plugins:
        score:
